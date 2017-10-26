@@ -9,24 +9,26 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.tecnologias.uniagustapp.navigationexpandablelistview.objects.ElementoMenu;
+
 import java.util.HashMap;
 import java.util.List;
-
 
 /**
  * Created by ivan.lobelo on 10/24/2017.
  */
 
 public class ExpandableListAdapter extends BaseExpandableListAdapter {
+
+
     private Context context;
     private List<String> listDataHeader;
-    private HashMap<String,List<String>> listHashMap;
-    int[] imagen;
+    private HashMap<String,List<ElementoMenu>> listElementosMenu;
 
-    public ExpandableListAdapter(Context context, List<String> listDataHeader, HashMap<String, List<String>> listHashMap) {
+    public ExpandableListAdapter(Context context, List<String> listDataHeader, HashMap<String, List<ElementoMenu>> listElementosMenu) {
         this.context = context;
         this.listDataHeader = listDataHeader;
-        this.listHashMap = listHashMap;
+        this.listElementosMenu = listElementosMenu;
     }
 
     @Override
@@ -37,7 +39,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     @Override
     public int getChildrenCount(int i) {
 
-        return listHashMap.get(listDataHeader.get(i)).size();
+        return listElementosMenu.get(listDataHeader.get(i)).size();
     }
 
     @Override
@@ -47,7 +49,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public Object getChild(int i, int i1) {
-        return listHashMap.get(listDataHeader.get(i)).get(i1);// i= Group item, i1 = childItem
+        return listElementosMenu.get(listDataHeader.get(i)).get(i1);// i= Group item, i1 = childItem
     }
 
     @Override
@@ -80,8 +82,10 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getChildView(int i, int i1, boolean b, View view, ViewGroup viewGroup) {
-        final String childText = (String)getChild(i,i1);
-        final int childImg =  (int)getChild(i,i1);
+        //Obtiene titulo.
+        final String childText = listElementosMenu.get(listDataHeader.get(i)).get(i1).getTitulo();
+        //Obtiene Imagen.
+        final int childImg =  listElementosMenu.get(listDataHeader.get(i)).get(i1).getImagenResource();
         if(view == null){
             LayoutInflater inflater = (LayoutInflater)this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.list_subcategoria,null);
@@ -89,7 +93,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         TextView item_name = (TextView)view.findViewById(R.id.list_item_name);
         item_name.setText(childText);
         ImageView item_icon = (ImageView)view.findViewById(R.id.list_item_scate_icon);
-        item_icon.setImageResource(imagen[i]);
+        item_icon.setImageResource(childImg);
         return view;
     }
 

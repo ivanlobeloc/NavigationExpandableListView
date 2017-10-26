@@ -10,17 +10,19 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ExpandableListView;
 
+import com.tecnologias.uniagustapp.navigationexpandablelistview.objects.ElementoMenu;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    //ListView
+    //ExpandableListView
     private ExpandableListView listView;
     private ExpandableListAdapter listAdapter;
     private List<String> listDataHeader;
-    private HashMap<String,List<String>> listHash;
+    private HashMap<String,List<ElementoMenu>> listHash;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         listView = (ExpandableListView)findViewById(R.id.ex_lits_menu);
         initData();
         listAdapter = new ExpandableListAdapter(this, listDataHeader,listHash);
-        listView.setAdapter(listAdapter);
+        listView.setAdapter(listAdapter);//*
 
     }
 
@@ -54,31 +56,47 @@ public class MainActivity extends AppCompatActivity {
         listDataHeader.add("Redes Sociales");
         listDataHeader.add("Entretenimiento");
 
-        List<String> itemMenus1 = new ArrayList<>();
-        itemMenus1.add("Home");
-        itemMenus1.add("Biblioteca");
-        itemMenus1.add("EduVirtual");
-        itemMenus1.add("Directorio");
-        itemMenus1.add("Preguntas");
+        List<ElementoMenu> itemMenus1 = new ArrayList<>();
+        ElementoMenu elemento = new ElementoMenu("Home", R.drawable.img1);
+        itemMenus1.add(elemento);
+        elemento = new ElementoMenu("Biblioteca", R.drawable.img2);
+        itemMenus1.add(elemento);
+        elemento = new ElementoMenu("EduVirtual", R.drawable.img3);
+        itemMenus1.add(elemento);
+        elemento = new ElementoMenu("Directorio", R.drawable.img4);
+        itemMenus1.add(elemento);
+        elemento = new ElementoMenu("Preguntas", R.drawable.img1);
+        itemMenus1.add(elemento);
 
-        List<String> itemMenus2 = new ArrayList<>();
-        itemMenus2.add("Siga");
-        itemMenus2.add("Siga");
-        itemMenus2.add("Apoyo a la Presencialidad");
-        itemMenus2.add("Virtualidad");
+        List<ElementoMenu> itemMenus2 = new ArrayList<>();
+        elemento = new ElementoMenu("Siga", R.drawable.img1);
+        itemMenus2.add(elemento);
+        elemento = new ElementoMenu("Apoyo a la Presencialidad", R.drawable.img2);
+        itemMenus2.add(elemento);
+        elemento = new ElementoMenu("Virtualidad", R.drawable.img3);
+        itemMenus2.add(elemento);
 
-        List<String> itemMenus3 = new ArrayList<>();
-        itemMenus3.add("Youtube");
-        itemMenus3.add("Twitter");
-        itemMenus3.add("Facebook");
-        itemMenus3.add("Flicker");
-        itemMenus3.add("Google +");
-        itemMenus3.add("Instagram");
-        itemMenus3.add("LinkedIn");
+        List<ElementoMenu> itemMenus3 = new ArrayList<>();
+        elemento = new ElementoMenu("Youtube", R.drawable.img1);
+        itemMenus3.add(elemento);
+        elemento = new ElementoMenu("Twitter", R.drawable.img2);
+        itemMenus3.add(elemento);
+        elemento = new ElementoMenu("Facebook", R.drawable.img3);
+        itemMenus3.add(elemento);
+        elemento = new ElementoMenu("Flicker", R.drawable.img4);
+        itemMenus3.add(elemento);
+        elemento = new ElementoMenu("Google +", R.drawable.img1);
+        itemMenus3.add(elemento);
+        elemento = new ElementoMenu("Instagram", R.drawable.img2);
+        itemMenus3.add(elemento);
+        elemento = new ElementoMenu("LinkedIn", R.drawable.img3);
+        itemMenus3.add(elemento);
 
-        List<String> itemMenus4 = new ArrayList<>();
-        itemMenus4.add("Tour 360");
-        itemMenus4.add("Juegos");
+        List<ElementoMenu> itemMenus4 = new ArrayList<>();
+        elemento = new ElementoMenu("Tour 360", R.drawable.img1);
+        itemMenus4.add(elemento);
+        elemento = new ElementoMenu("Juegos", R.drawable.img2);
+        itemMenus4.add(elemento);
 
         listHash.put(listDataHeader.get(0),itemMenus1);
         listHash.put(listDataHeader.get(1),itemMenus2);
