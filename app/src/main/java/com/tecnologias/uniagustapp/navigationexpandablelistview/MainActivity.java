@@ -8,7 +8,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ExpandableListView;
+import android.widget.Toast;
 
 import com.tecnologias.uniagustapp.navigationexpandablelistview.objects.ElementoMenu;
 
@@ -42,6 +44,35 @@ public class MainActivity extends AppCompatActivity {
         initData();
         listAdapter = new ExpandableListAdapter(this, listDataHeader,listHash);
         listView.setAdapter(listAdapter);//*
+
+        //Tutorial: https://www.youtube.com/watch?v=oPGdPQvqPVM
+        // Evento Grupo expandido
+        listView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+            @Override
+            public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
+                Toast.makeText(MainActivity.this, listDataHeader.get(groupPosition)+" was expanded", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        });
+        //Evento Grupo Contraido
+        listView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
+            @Override
+            public void onGroupCollapse(int groupPosition) {
+                Toast.makeText(MainActivity.this, listDataHeader.get(groupPosition)+" was collapsed", Toast.LENGTH_SHORT).show();
+            }
+        });
+        //Evento Child Item
+        listView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+            @Override
+            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+                Toast.makeText(MainActivity.this, listDataHeader.get(groupPosition)+" was expanded", Toast.LENGTH_SHORT).show();
+                //Integer in=(Integer)listHash;
+                //int num = Integer.parseInt(String.valueOf(listHash));
+                Toast.makeText(MainActivity.this, listHash.get(childPosition)+" was clicked", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        });
+
 
     }
 
