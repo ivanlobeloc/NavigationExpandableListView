@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Tutorial: https://www.youtube.com/watch?v=oPGdPQvqPVM
         // Evento Grupo expandido
+        /*
         listView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
             @Override
             public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
@@ -72,9 +73,25 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+        */
+        //Evento Child Item
+        listView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+            @Override
+            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+                String grupo;
+                grupo = listDataHeader.get(groupPosition);
+                //Toast.makeText(MainActivity.this, grupo+" -grupo", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(MainActivity.this, listDataHeader.get(groupPosition), Toast.LENGTH_SHORT).show();
+
+                Toast.makeText(MainActivity.this, listHash.get(listDataHeader.get(groupPosition)).get(childPosition).getTitulo(), Toast.LENGTH_SHORT).show();
+
+
+                return false;
+            }
+        });
     }
 
-    //Cargue ListView
+    //Initialize ListView
     private void initData() {
 
         listDataHeader = new ArrayList<>();
